@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:id="@+id/activity_news_list_activiry"
+              xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/bg_2"
+              android:orientation="vertical"
+              android:paddingBottom="20dp"
+              android:paddingLeft="40dp"
+              android:paddingRight="20dp"
+              android:paddingTop="20dp"
+              tools:context="com.frameclient.activitys.NewsListActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="新闻中心"
+        android:textColor="@color/white"
+        android:textSize="30sp"/>
+
+    <GridView
+        android:id="@+id/grid_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:horizontalSpacing="10dp"
+        android:listSelector="@drawable/bg_button_focused"
+        android:numColumns="1"
+        android:scrollbars="none"
+        android:verticalSpacing="10dp">
+    </GridView>
+
+</LinearLayout>
