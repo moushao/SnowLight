@@ -4,12 +4,15 @@ package com.frameclient.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.text.method.ScrollingMovementMethod;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -19,10 +22,13 @@ public class ViewHolder {
     private final SparseArray<View> mViews;
     private int mPosition;
     private View mConvertView;
+    private ItemClick mItemClick;
+
 
     private ViewHolder(Context context, ViewGroup parent, int layoutId,
-                       int position) {
+                       int position, ItemClick mItemClick) {
         this.mPosition = position;
+        this.mItemClick = mItemClick;
         this.mViews = new SparseArray<View>();
         mConvertView = LayoutInflater.from(context).inflate(layoutId, parent,
                 false);
@@ -41,9 +47,9 @@ public class ViewHolder {
      * @return
      */
     public static ViewHolder get(Context context, View convertView,
-                                 ViewGroup parent, int layoutId, int position) {
+                                 ViewGroup parent, int layoutId, int position, ItemClick mItemClick) {
         if (convertView == null) {
-            return new ViewHolder(context, parent, layoutId, position);
+            return new ViewHolder(context, parent, layoutId, position, mItemClick);
         }
         return (ViewHolder) convertView.getTag();
     }
@@ -77,6 +83,13 @@ public class ViewHolder {
     public ViewHolder setText(int viewId, String text) {
         TextView view = getView(viewId);
         view.setText(text);
+        view.setKeyListener(null);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mItemClick.onItemClick(mPosition);
+            }
+        });
         return this;
     }
 
@@ -162,5 +175,10 @@ public class ViewHolder {
 
     public int getPosition() {
         return mPosition;
+    }
+
+    public interface ItemClick {
+
+        void onItemClick(int position);
     }
 }

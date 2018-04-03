@@ -44,6 +44,7 @@ public class SplashActivity extends Activity {
     private CheckBox view_autologin;
     private RelativeLayout login_layout;
     private RelativeLayout init_layout;
+    private View configView;
 
 
     private static final String TAG = "FrmaeDebug";
@@ -66,18 +67,18 @@ public class SplashActivity extends Activity {
      * 如果登录成功后,用于保存PASSWORD到SharedPreferences,以便下次不再输入
      */
     private String SHARE_LOGIN_PASSWORD = "LOGIN_PASSWORD";
+    /** 如果登陆失败,这个可以给用户确切的消息显示,true是网络连接失败,false是用户名和密码错误 */
+
+
     /**
      * 如果登录成功后,用于保存PASSWORD到SharedPreferences,以便下次不再输入
      */
     private String SHARE_LOGIN_IP_ADDR = "LOGIN_IPADDR";
 
-    /** 如果登陆失败,这个可以给用户确切的消息显示,true是网络连接失败,false是用户名和密码错误 */
-
     /**
      * 登录loading提示框
      */
     private ProgressDialog proDialog;
-
     /**
      * 登录后台通知更新UI线程,主要用于登录失败,通知UI线程更新界面
      */
@@ -340,12 +341,6 @@ public class SplashActivity extends Activity {
             setData(false);
             login_layout.setVisibility(View.VISIBLE);
         }
-        //
-
-        //Log.i(TAG, "starting newtworkservice.....");
-        // Intent it = new Intent("com.frameclient.services.networkservice");
-        //Intent it = new Intent(LoginActivity.this, NetWorkService.class);
-        //startService(it);
 
     }
 
@@ -410,6 +405,7 @@ public class SplashActivity extends Activity {
         view_autologin = (CheckBox) findViewById(R.id.autologin);
         login_layout = (RelativeLayout) findViewById(R.id.login_layout);
         init_layout = (RelativeLayout) findViewById(R.id.init_layout);
+        configView = findViewById(R.id.ip_config);
     }
 
     /**
@@ -474,6 +470,12 @@ public class SplashActivity extends Activity {
         view_login.setOnClickListener(submitListener);
         view_remember.setOnClickListener(rememberPasswordListener);
         view_autologin.setOnClickListener(autologinListener);
+        configView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SplashActivity.this, IPActivity.class));
+            }
+        });
     }
 
     private void login() {
@@ -491,8 +493,6 @@ public class SplashActivity extends Activity {
         public void onClick(View v) {
             if (checkData()) {
                 saveSharePreferences(false, true, true);
-                //            proDialog = ProgressDialog.show(SplashActivity.this, "连接中..",
-                //                    "连接中..请稍后....", true, true);
                 init_layout.setVisibility(View.VISIBLE);
                 Thread loginThread = new Thread(new SplashActivity.LoginFailureHandler());
                 loginThread.start();
@@ -602,7 +602,6 @@ public class SplashActivity extends Activity {
     class LoginFailureHandler implements Runnable {
         @Override
         public void run() {
-            //Constants.IP_ADDRESS = Constants.BASE_IP + ":6611";
             Intent it = new Intent(SplashActivity.this, NetWorkService.class);
             Bundle bundle = new Bundle();
             bundle.putInt("opera", 0);
@@ -611,8 +610,6 @@ public class SplashActivity extends Activity {
             bundle.putString("password", Constants.LOGIN_PWD);
             it.putExtras(bundle);
             startService(it);
-
-
         }
 
     }

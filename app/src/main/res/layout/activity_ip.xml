@@ -8,20 +8,31 @@
     android:orientation="vertical"
     >
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="视频地址:"
+        android:layout_marginTop="50dp"
+        android:textSize="18sp"/>
+
     <EditText
         android:id="@+id/ip_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:hint="输入IP_ADDRESS"/>
+        android:hint="如:114.98.228.210:6611"/>
     />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="报警地址:"
+        android:textSize="18sp"/>
     <EditText
         android:id="@+id/ip_base_url"
         android:layout_width="match_parent"
-        android:hint="输入BASE_URL"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"/>
+        android:layout_margin="5dp"
+        android:hint="如:114.98.228.210:8081"/>
 
     <Button
         android:id="@+id/save_ip"

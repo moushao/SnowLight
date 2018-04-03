@@ -24,18 +24,28 @@
 
         </ImageView>
 
-        <TextView
-            android:id="@+id/tv_camera"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="left|center"
-            android:gravity="center_vertical|left"
-            android:singleLine="true"
-            android:text="Camera01"
-            android:textColor="@drawable/item_text_color"
-            android:textSize="18dp">
+        <!--<HorizontalScrollView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:clickable="false"-->
+            <!--android:scrollbars="none">-->
 
-        </TextView>
+            <EditText
+                android:id="@+id/tv_camera"
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center"
+                android:background="@null"
+                android:cursorVisible="false"
+                android:gravity="center_vertical|left"
+                android:focusable="false"
+                android:singleLine="true"
+                android:text="Camera01"
+                android:textColor="@drawable/item_text_color"
+                android:textSize="18dp">
+
+            </EditText>
+        <!--</HorizontalScrollView>-->
     </LinearLayout>
 
 </LinearLayout>

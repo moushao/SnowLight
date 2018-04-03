@@ -3,254 +3,238 @@
               xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
+              android:background="@drawable/bg_2"
               android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <ImageView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="fitXY"
-            android:src="@drawable/bg_2"/>
+            android:layout_height="45dp"
+            android:background="@drawable/headerbk"
+            android:visibility="gone"
+            >
+
+
+            <Button
+                android:id="@+id/btn_menu"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_resource_button_style"
+                android:gravity="center"
+                android:text="@string/menu"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="visible"></Button>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/list"
+                android:textColor="@color/white"
+                android:textSize="16dp"></TextView>
+
+
+            <Button
+                android:id="@+id/btn_back"
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_resource_button_style"
+                android:gravity="center"
+                android:text="@string/web"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                android:visibility="visible"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:visibility="gone"
+            >
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/headerbk"
-                android:visibility="gone"
-                >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2">
-
-                    <Button
-                        android:id="@+id/btn_menu"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/bg_resource_button_style"
-                        android:gravity="center"
-                        android:text="@string/menu"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-                        android:visibility="visible"></Button>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:gravity="center">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="@string/list"
-                        android:textColor="@color/white"
-                        android:textSize="16dp"></TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:gravity="center">
-
-                    <Button
-                        android:id="@+id/btn_back"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="20dp"
-                        android:layout_marginTop="5dp"
-                        android:background="@drawable/bg_resource_button_style"
-                        android:gravity="center"
-                        android:text="@string/web"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-                        android:visibility="visible"/>
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
+            <ListView
+                android:id="@+id/list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone">
+                android:cacheColorHint="#000000"
+                android:divider="@null"
+                android:fadeScrollbars="false"
+                android:fadingEdge="none"
+                android:fastScrollEnabled="true"
+                android:scrollbarFadeDuration="0"
+                android:scrollbars="vertical"
+                android:scrollingCache="false"/>
 
-                <ListView
-                    android:id="@+id/list"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:cacheColorHint="#000000"
-                    android:divider="@null"
-                    android:fadeScrollbars="false"
-                    android:fadingEdge="none"
-                    android:fastScrollEnabled="true"
-                    android:scrollbarFadeDuration="0"
-                    android:scrollbars="vertical"
-                    android:scrollingCache="false"/>
+        </LinearLayout>
 
-            </LinearLayout>
+        <!--<RelativeLayout-->
 
-            <RelativeLayout
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+
+        <!--<ImageView
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/lt_logo"/>-->
+
+
+        <!--</RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/config"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="10dp"
                     android:text="雪亮工程"
                     android:textColor="@color/white"
                     android:textSize="28sp"
                     android:textStyle="bold"/>
 
-
-                <ImageView
-                    android:layout_width="100dp"
-                    android:layout_height="50dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="40dp"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/lt_logo"/>
-
-
-            </RelativeLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:visibility="visible">
-
                 <ListView
                     android:id="@+id/list_view"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
-                    android:layout_weight="1"
                     android:divider="@null"
                     android:listSelector="@drawable/bg_button_focused"
                     android:scrollbars="none">
 
                 </ListView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <FrameLayout
+                    android:id="@+id/frame_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1">
+
+                </FrameLayout>
 
                 <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="30dp"
-                    android:layout_weight="3"
-                    android:orientation="vertical">
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp">
 
-                    <FrameLayout
-                        android:id="@+id/frame_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1">
-
-                    </FrameLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <Button
+                        android:id="@+id/btn_110"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="10dp">
+                        android:layout_weight="1"
+                        android:background="@drawable/sle_btn_bottom"
+                        android:padding="10dp"
+                        android:text="110"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
 
-                        <Button
-                            android:id="@+id/btn_110"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:background="@drawable/sle_btn_bottom"
-                            android:padding="10dp"
-                            android:text="110"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
+                    <Button
+                        android:id="@+id/btn_112"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sle_btn_bottom"
+                        android:padding="10dp"
+                        android:text="120"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
 
-                        <Button
-                            android:id="@+id/btn_112"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/sle_btn_bottom"
-                            android:padding="10dp"
-                            android:text="120"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
+                    <Button
+                        android:id="@+id/btn_119"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sle_btn_bottom"
+                        android:padding="10dp"
+                        android:text="119"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
 
-                        <Button
-                            android:id="@+id/btn_119"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/sle_btn_bottom"
-                            android:padding="10dp"
-                            android:text="119"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
-
-                        <Button
-                            android:id="@+id/btn_jinbao"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/sle_btn_bottom"
-                            android:padding="10dp"
-                            android:text="普警"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"/>
-
-                    </LinearLayout>
-
+                    <Button
+                        android:id="@+id/btn_jinbao"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/sle_btn_bottom"
+                        android:padding="10dp"
+                        android:text="普警"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"/>
 
                 </LinearLayout>
 
-            </LinearLayout>
 
-            <com.frameclient.widget.ScrollingTextView
-                android:id="@+id/txt_bottom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/sle_pao_ma_deng"
-                android:ellipsize="marquee"
-                android:focusable="true"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:paddingBottom="10dp"
-                android:paddingLeft="5dp"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp"
-                android:singleLine="true"
-                android:textColor="@color/white"
-                android:textSize="16sp"/>
+            </LinearLayout>
 
         </LinearLayout>
 
+        <com.frameclient.widget.ScrollingTextView
+            android:id="@+id/txt_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/sle_pao_ma_deng"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:paddingBottom="10dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="5dp"
+            android:singleLine="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="gone"
+            />
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 </LinearLayout>

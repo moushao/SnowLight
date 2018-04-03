@@ -15,9 +15,9 @@ public class Constants {
     */
 
     //四川本地接口
-    public static String BASE_IP = "118.112.185.226";
+ /*   public static String BASE_IP = "118.112.185.226";
     public static String IP_ADDRESS = "118.112.185.226:8898";
-    public static String BASE_URL = "http://192.168.0.104:8081/";
+    public static String BASE_URL = "http://192.168.0.104:8081/";*/
 
     //广西来宾接口
 /*
@@ -27,8 +27,8 @@ public class Constants {
 */
 
     //安徽合肥接口
-    /*public static String BASE_IP = "114.98.228.210";
-    public static String IP_ADDRESS = "114.98.228.210:6711";
-    public static String BASE_URL = "http://114.98.228.210:8081";*/
+    public static String BASE_IP = "114.98.228.210";
+    public static String IP_ADDRESS = "114.98.228.210:6611";
+    public static String BASE_URL = "http://114.98.228.210:8081";
 
 }

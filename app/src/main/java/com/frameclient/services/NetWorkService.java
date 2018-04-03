@@ -61,6 +61,7 @@ public class NetWorkService extends IntentService {
                 res = ipaddr.indexOf(":");
 
                 if (res < 0) {
+                    //如果没有默认的端口，添加默认端口6611
                     SoftResource.login_ip = ipaddr;
                     res = tcp.connect_sever(ipaddr, SoftResource.login_socket_port);
                 } else {

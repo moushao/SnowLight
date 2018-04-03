@@ -131,11 +131,6 @@ public class MainActivity extends Activity {
                             });
                     builder.create();
                     builder.show();
-                /*
-                 * new AlertDialog.Builder(SourceActivity.this) .setTitle("消息")
-				 * .setMessage("是否打开"+url) .setPositiveButton("是", null)
-				 * .setNegativeButton("否", null) .show();
-				 */
 
                     break;
                 case 2:
@@ -150,8 +145,6 @@ public class MainActivity extends Activity {
                         }
 
                         SoftResource.level++;
-                        // Log.v(TAG,
-                        // "=================> level  "+SoftResource.level+"  count = "+getCount());
 
                         Log.v(TAG, "start time....count = "
                                 + SoftResource.getList().size());
@@ -160,22 +153,12 @@ public class MainActivity extends Activity {
                             ResourceItemInfo elem = (ResourceItemInfo) SoftResource
                                     .getElem(i);
 
-                            // Log.v(TAG, "the " +i+ " name = " + elem.name);
 
                             if (elem.parent_index == SoftResource.nextResource.indexInList) {
-                                // Log.v(TAG,
-                                // "pos = "+i+" rii id = "+rii.id+" elem id "+elem.id+
-                                // " parentid  "+elem.parent_id+
-                                // " name = "+elem.name);
-                                // Log.v(TAG,"elem state  = "+elem.status);
                                 ResourceItemInfo info = ResourceItemInfo.copy(elem);
                                 info.isShow = true;
                                 info.level = SoftResource.level;
                                 SoftResource.insertAdapterElem(info);
-
-                                // Log.v(TAG,
-                                // "set "+i+" level "+info.level+" isShow true add into s_list size "+SoftResource
-                                // .getAdapterListSize());
                             }
                         }
 
@@ -225,7 +208,7 @@ public class MainActivity extends Activity {
 
         resList = new ArrayList<>();
 
-        if (isLogin == true) {
+        if (isLogin) {
             listadapter = new ResourceAdapter(mcontext, handler,
                     SoftResource.getList(), SoftResource.getAdapterList());
             view_listview.setAdapter(listadapter);
@@ -250,7 +233,13 @@ public class MainActivity extends Activity {
                 listadapter.notifyDataSetInvalidated();
                 listadapter.notifyDataSetChanged();
 
-                adapter = new CommonListAdapter<ResourceItemInfo>(this, resList, R.layout.item_camera) {
+                adapter = new CommonListAdapter<ResourceItemInfo>(this, resList, R.layout.item_camera, new ViewHolder
+                        .ItemClick() {
+                    @Override
+                    public void onItemClick(int i) {
+                        setFragment(resList.get(i), i);
+                    }
+                }) {
                     @Override
                     public void convert(ViewHolder helper, final ResourceItemInfo item, final int position) {
                         helper.setText(R.id.tv_camera, item.name);
@@ -303,7 +292,8 @@ public class MainActivity extends Activity {
                     }
                 });
 
-                apiRequest.getNewsList();
+                // 手机版本的
+                // apiRequest.getNewsList();
 
 
                 IntentFilter intentFilter = new IntentFilter();
@@ -315,16 +305,20 @@ public class MainActivity extends Activity {
                 SoftResource.login = true;
 
             } else {
-                Intent it = new Intent();
-                it.setClass(MainActivity.this, SplashActivity.class);
-                startActivity(it);
-                SoftResource.login = false;
-                finish();
+                gotoSplashActivity();
             }
 
             Log.i(TAG, "--->onCreate list.size() = " + SoftResource.getListSize());
         }
 
+    }
+
+    private void gotoSplashActivity() {
+        Intent it = new Intent();
+        it.setClass(MainActivity.this, SplashActivity.class);
+        startActivity(it);
+        SoftResource.login = false;
+        finish();
     }
 
     private View.OnClickListener menu_listerner = new View.OnClickListener() {
@@ -443,7 +437,7 @@ public class MainActivity extends Activity {
         }
 
         if (0 < SoftResource.camera_pos && SoftResource.camera_pos <= resList.size() - 1) {
-            list_view.setSelection(SoftResource.camera_pos);    
+            list_view.setSelection(SoftResource.camera_pos);
         }
         Log.i(TAG, "--->onStart list.size() = " + SoftResource.getListSize());
     }
@@ -705,7 +699,7 @@ public class MainActivity extends Activity {
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, IPActivity.class));
+                //startActivity(new Intent(MainActivity.this, IPActivity.class));
             }
         });
 
@@ -719,7 +713,6 @@ public class MainActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 setFragment(resList.get(i), i);
-                //                Toast.makeText(MainActivity.this,i+"",Toast.LENGTH_SHORT).show();
             }
         });
     }

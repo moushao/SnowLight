@@ -30,7 +30,17 @@ public class NewsListActivity extends Activity {
 
         newsList = new ArrayList<>();
 
-        adapter = new CommonListAdapter<NewsListBean.ResultBean>(this, newsList, R.layout.item_news) {
+        adapter = new CommonListAdapter<NewsListBean.ResultBean>(this, newsList, R.layout.item_news, new ViewHolder.ItemClick() {
+            
+
+
+            @Override
+            public void onItemClick(int i) {
+                Intent intent = new Intent(NewsListActivity.this, NewsWebActivity.class);
+                intent.putExtra("url",newsList.get(i).getUrl());
+                startActivity(intent);
+            }
+        }) {
             @Override
             public void convert(ViewHolder helper, NewsListBean.ResultBean item, int position) {
                 helper.setText(R.id.txt_name, item.getTitle());

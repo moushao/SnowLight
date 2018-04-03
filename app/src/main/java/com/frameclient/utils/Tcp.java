@@ -124,7 +124,7 @@ public class Tcp {
     }
 
     public Tcp() {
-        send_thread = new SendData();// 启动收听线程线程
+        send_thread = new SendData();// 启动收听线程
     }
 
     class SendData implements Runnable {
@@ -245,8 +245,7 @@ public class Tcp {
             Log.v(TAG, "bytes len = " + bytes.length);
             Log.v(TAG, "com len = " + com.length);
 
-            String str = new String(com);
-
+            //String str = new String(com);
             //Log.v(TAG,"send command < "+str+" >");
 
             bytebuf = ByteBuffer.wrap(com);
@@ -359,6 +358,7 @@ public class Tcp {
         try {
             selector = Selector.open();
             selector_write = Selector.open();
+            //创建IP地址为addr，端口号为port的端口地址
             InetSocketAddress socAddress = new InetSocketAddress(ipaddr, port);//InetSocketAddress.createUnresolved 
             // (ipaddr,port);	
             client = SocketChannel.open();
@@ -402,6 +402,7 @@ public class Tcp {
 
         for (int i = 0; i < 100; i++) {
             try {
+                //判断Socket通道是否建立
                 if (client.finishConnect()) {
                     return 1;
                 }
@@ -413,7 +414,7 @@ public class Tcp {
 
             try {
                 Thread.sleep(30);
-                Log.d(TAG, "wait for " + i + " timer to connect server");
+                Log.d(TAG, "wait for " + i + " timer to connect server");1
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();

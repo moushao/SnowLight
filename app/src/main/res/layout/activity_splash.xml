@@ -16,18 +16,24 @@
         android:paddingRight="20dp"
         >
 
+        <View
+            android:id="@+id/ip_config"
+            android:layout_width="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="10dp"
+            android:layout_height="40dp"/>
         <TextView
             android:id="@+id/title"
             android:layout_width="600dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="60dp"
             android:gravity="center"
             android:scaleX="1.2"
             android:text="OpenNetSystem"
             android:textColor="#ed6920"
-            android:textSize="68dp"
+            android:textSize="36dp"
             android:textStyle="bold"/>
 
         <TextView
@@ -40,7 +46,6 @@
             android:text="for android"
             android:textColor="#cfcfcf"
             android:textSize="32dp"
-            android:visibility="gone"
             android:textStyle="bold"/>
 
         <LinearLayout
@@ -50,11 +55,6 @@
             android:layout_marginTop="50dp"
             android:orientation="horizontal">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -142,7 +142,7 @@
                         android:gravity="left|center_vertical"
                         android:text="@string/username"
                         android:textColor="@color/text_color"
-                        android:textSize="24dp">
+                        android:textSize="18dp">
                     </TextView>
 
                     <EditText
@@ -195,7 +195,7 @@
                         android:gravity="left|center_vertical"
                         android:text="密    码"
                         android:textColor="@color/text_color"
-                        android:textSize="24dp">
+                        android:textSize="18dp">
                     </TextView>
 
                     <EditText
@@ -272,31 +272,17 @@
                     </TextView>
                 </LinearLayout>
 
-
-                <LinearLayout
-                    android:id="@+id/button_layout"
-                    android:layout_width="400dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal">
-
-                    <Button
-                        android:id="@+id/btn_login"
-                        android:layout_width="match_parent"
-                        android:layout_height="48dp"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/login_button_image"
-                        android:text="@string/login"
-                        android:textColor="@drawable/button_font_style"
-                        android:textSize="24dp"/>
-                </LinearLayout>
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/login_button_image"
+                    android:text="@string/login"
+                    android:textColor="@drawable/button_font_style"
+                    android:textSize="18dp"/>
             </LinearLayout>
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                />
         </LinearLayout>
 
 
