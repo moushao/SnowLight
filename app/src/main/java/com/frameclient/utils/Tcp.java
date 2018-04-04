@@ -1,12 +1,15 @@
 package com.frameclient.utils;
 
-import java.io.BufferedOutputStream;
+import android.annotation.SuppressLint;
+import android.util.Log;
+import android.util.Xml;
+
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+
 import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
@@ -19,19 +22,9 @@ import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
-
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-
-import android.annotation.SuppressLint;
-import android.content.Context;
-import android.util.Log;
-import android.util.Xml;
 
 public class Tcp {
     /**
@@ -181,7 +174,8 @@ public class Tcp {
             }
 
         }
-
+     /* flip()函数的作用是将写模式转变为读模式，即将写模式下的Buffer中内容的最后位置变为读模式下的limit位置，作为读越界位置
+        同时将当前读位置置为0，表示转换后重头开始读，同时再消除写模式下的mark标记，代码如下*/
         data.flip();
 
         return total_read;
@@ -204,7 +198,6 @@ public class Tcp {
 
                     }
                 } catch (Exception e) {
-
                     key.cancel();
                 }
             }
@@ -236,6 +229,7 @@ public class Tcp {
             byte[] opera = int2byteArray(opera_num);
             byte[] bytes = content.getBytes();
             byte[] com = new byte[content.length() + 8];
+            //从len的第0个位置开始，拷贝len.length个元素到com的0个开始
             System.arraycopy(len, 0, com, 0, len.length);
             System.arraycopy(opera, 0, com, len.length, opera.length);
             System.arraycopy(bytes, 0, com, len.length + opera.length, bytes.length);
@@ -244,9 +238,6 @@ public class Tcp {
             Log.v(TAG, "opear len = " + opera.length);
             Log.v(TAG, "bytes len = " + bytes.length);
             Log.v(TAG, "com len = " + com.length);
-
-            //String str = new String(com);
-            //Log.v(TAG,"send command < "+str+" >");
 
             bytebuf = ByteBuffer.wrap(com);
 
@@ -352,6 +343,7 @@ public class Tcp {
         sendMessage(SoftResource.DATATYEP_KEEPALIVE, "");
     }
 
+    //连接服务器，成功返回为0，失败返回为-1
     public int connect_sever(String ipaddr, int port) {
         int res = -1;
 
@@ -414,7 +406,7 @@ public class Tcp {
 
             try {
                 Thread.sleep(30);
-                Log.d(TAG, "wait for " + i + " timer to connect server");1
+                Log.d(TAG, "wait for " + i + " timer to connect server");
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -445,9 +437,9 @@ public class Tcp {
 	            bos.close();
 	            */
                 try {
+                    //解析XML获取视频列表
                     int res = paresResourXml(cnt);
                 } catch (XmlPullParserException e) {
-                    // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
                 return bytesRead;
@@ -467,15 +459,15 @@ public class Tcp {
             ByteBuffer buf = ByteBuffer.allocateDirect(len);
 
             try {
-	        	/*
-	        	FileOutputStream fos = new FileOutputStream(path);
+                /*
+                FileOutputStream fos = new FileOutputStream(path);
 	        	BufferedOutputStream bos = new BufferedOutputStream(fos);
 				*/
                 int bytesRead = recv(buf, channel, len);
                 byte[] cnt = new byte[bytesRead];
                 buf.get(cnt);
-	            /*
-	            bos.write(cnt, 0, bytesRead);
+                /*
+                bos.write(cnt, 0, bytesRead);
 	            bos.flush();
 	            bos.close();
 	            */
@@ -770,7 +762,7 @@ public class Tcp {
                     //初始化books集合  
                     break;
                 case XmlPullParser.START_TAG://判断当前事件是否是标签元素开始事件  
-                    if ("C11".equals(parser.getName())) {//判断开始标签元素是否是  
+                    if ("C11".equals(nodeName)) {//判断开始标签元素是否是C11  
 
                         if (SoftResource.nextResource == null)  //初级资源
                         {

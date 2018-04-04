@@ -44,15 +44,15 @@ public class SoftResource
 	public static int err_passowrd_empty = -7;
 	
 	/**network opera code*/
-	public static int EVENT_LOGIN  = 1;
-	public static int EVENT_LOGOUT = 2;
-	public static int EVENT_CHANGE_PASSWORD = 3;
-	public static int EVENT_GET_CAMERA_SOURCE = 11;
-	public static int EVENT_GET_REAL_VIDEO = 12;
-	public static int EVENT_CONTROL_CAMERA = 13;
+	public final static int EVENT_LOGIN  = 1;
+	public final static int EVENT_LOGOUT = 2;
+	public final static int EVENT_CHANGE_PASSWORD = 3;
+	public final static int EVENT_GET_CAMERA_SOURCE = 11;
+	public final static int EVENT_GET_REAL_VIDEO = 12;
+	public final static int EVENT_CONTROL_CAMERA = 13;
 	public static int EVETN_GET_REAL_VIDEO_RSP = 216;
 	
-	public static int DATATYEP_KEEPALIVE = 0;
+	public final static int DATATYEP_KEEPALIVE = 0;
 	public static int DATATYPE_VDIEO = 100;
 	
 	public static boolean third_party_call  = false;

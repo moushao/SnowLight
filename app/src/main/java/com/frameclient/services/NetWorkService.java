@@ -1,5 +1,21 @@
 package com.frameclient.services;
 
+import android.annotation.SuppressLint;
+import android.app.IntentService;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.IBinder;
+import android.os.Looper;
+import android.util.Log;
+
+import com.frameclient.utils.Constants;
+import com.frameclient.utils.LoginRsp;
+import com.frameclient.utils.NotifyInfo;
+import com.frameclient.utils.SoftResource;
+import com.frameclient.utils.Tcp;
+
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.Socket;
@@ -8,24 +24,6 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
 import java.security.NoSuchAlgorithmException;
 import java.util.Iterator;
-
-import com.frameclient.utils.Constants;
-import com.frameclient.utils.LoginRsp;
-import com.frameclient.utils.NotifyInfo;
-import com.frameclient.utils.SoftResource;
-import com.frameclient.utils.Tcp;
-
-import android.annotation.SuppressLint;
-import android.app.IntentService;
-import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.IBinder;
-import android.os.Looper;
-import android.os.StrictMode;
-import android.util.Log;
 
 public class NetWorkService extends IntentService {
     private static final String TAG = "networkservice";
@@ -71,7 +69,7 @@ public class NetWorkService extends IntentService {
                     Log.i(TAG, "login ip split ipaddr string  ip = " + str[0] + " port = " + str[1]);
                     res = tcp.connect_sever(str[0], Integer.parseInt(str[1]));
                 }
-
+                //网络链接成功后，启动心跳包和收听线程
                 if (res == 0) {
                     if (keepalive == null) {
                         keepalive = new Thread(new KeepAlive()); //启动心跳包
@@ -91,8 +89,8 @@ public class NetWorkService extends IntentService {
                     tcp.sendLoginMsg(username, password);
                     user = username;
                 } else {
+                    //链接服务器失败，发送广播
                     Log.v(TAG, "res = " + res + " ipaddr = " + ipaddr);
-
                     Intent conn_rsp = new Intent("com.frameclient.connection.rsp");
                     conn_rsp.putExtra("result", res);
                     sendBroadcast(conn_rsp);
@@ -123,6 +121,7 @@ public class NetWorkService extends IntentService {
                 }
                 break;
             }
+            //密码更改
             case 3: {
                 Log.i(TAG, "onHandleIntent change pwd");
                 String curr_pass = arg0.getExtras().getString("curr_pass");
@@ -286,6 +285,7 @@ public class NetWorkService extends IntentService {
     @Override
     public void onStart(Intent intent, int startId) {
         Log.v(TAG, "--->onStart");
+        //调用super.onStart后就会开始执行onHandleIntent
         super.onStart(intent, startId);
     }
 
@@ -349,7 +349,7 @@ public class NetWorkService extends IntentService {
                             it.remove(); //删除迭代器
                             if (key.isReadable()) {
                                 SocketChannel channel = (SocketChannel) key.channel();
-
+                                //系统内存分配，非JVM内存分配
                                 ByteBuffer h = ByteBuffer.allocateDirect(8);
                                 h.clear();
 
@@ -369,14 +369,13 @@ public class NetWorkService extends IntentService {
                                 //Log.v(TAG, "recv opera "+opera+" len "+len);
 
                                 switch (opera) {
-                                    case 0: //keep alive
+                                    case SoftResource.DATATYEP_KEEPALIVE: //心跳包
                                     {
-                                        //Log.v(TAG,"recv keepalive packet : len = "+len+" opera = "+opera);
                                         break;
                                     }
-                                    case 1: // login
+
+                                    case SoftResource.EVENT_LOGIN: //登陆返回
                                     {
-                                        //Log.v(TAG,"recv login rsp packet : len = "+len+" opera = "+opera);
                                         ByteBuffer content = ByteBuffer.allocateDirect(len);
                                         int read_total = tcp.recv(content, channel, len);
                                         byte[] cnt = new byte[len];
@@ -394,7 +393,7 @@ public class NetWorkService extends IntentService {
 												intent.putExtra("type", rsp.type);
 												sendBroadcast(intent);
 												*/
-
+                                            //登录成功后开始获取资源
                                             tcp.sendGetResourceMsg(rsp.uid, rsp.source_id, rsp.type);
 
                                             Constants.uuid = rsp.uid;
@@ -409,7 +408,7 @@ public class NetWorkService extends IntentService {
                                         }
                                         break;
                                     }
-                                    case 3: {
+                                    case SoftResource.EVENT_CHANGE_PASSWORD: {
                                         ByteBuffer content = ByteBuffer.allocateDirect(len);
                                         int read_total = tcp.recv(content, channel, len);
                                         String str = new String(content.array());
@@ -420,7 +419,7 @@ public class NetWorkService extends IntentService {
                                         sendBroadcast(intent);
                                         break;
                                     }
-                                    case 11: //get source xml
+                                    case SoftResource.EVENT_GET_CAMERA_SOURCE: //get source xml
                                     {
 
                                         Log.v(TAG, "recv get resrouce rsp packet from resource server");
@@ -433,14 +432,13 @@ public class NetWorkService extends IntentService {
                                             Log.v(TAG, "resource lisst count = " + SoftResource.getListSize());
                                             SoftResource.isGetResource = true;
                                             Intent intent = new Intent("com.frameclient.getresource.rsp");
-                                            intent.putExtra("result", 0); //登陆成功
+                                            intent.putExtra("result", 0); //获取成功
                                             sendBroadcast(intent);
-
                                         }
                                         break;
 
                                     }
-                                    case 1011: {
+                                    case 1011: {//摄像机不存在
                                         Log.v(TAG, "====> get 1011");
                                         Intent intent = new Intent("com.frameclient.getresource.rsp");
                                         intent.putExtra("result", -1); //获取失败

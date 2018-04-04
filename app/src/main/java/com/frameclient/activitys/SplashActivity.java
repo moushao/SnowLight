@@ -87,6 +87,36 @@ public class SplashActivity extends Activity {
             int error = msg.getData().getInt("error");
 
             switch (error) {
+                case 0:
+                    if (proDialog != null) {
+                        proDialog.dismiss();
+                    }
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    /*Toast.makeText(SplashActivity.this, "登陆成功",
+                                            Toast.LENGTH_SHORT)
+                                            .show();*/
+                                    Intent intent = new Intent();
+                                    intent.putExtra("isLogin", true);
+                                    intent.setClass(SplashActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
+
+                        }
+                    }, 1000);
+
+                    try {
+                        unregisterReceiver(broadcastRec);
+                    } catch (Exception e) {
+                        // TODO: handle exception
+                    }
+                    break;
                 case 1:
                     if (proDialog != null) {
                         proDialog.dismiss();
@@ -173,36 +203,7 @@ public class SplashActivity extends Activity {
                     changeLayout();
 
                     break;
-                case 0:
-                    if (proDialog != null) {
-                        proDialog.dismiss();
-                    }
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //                                    Toast.makeText(SplashActivity.this, "登陆成功",
-                                    // Toast.LENGTH_SHORT)
-                                    //                                            .show();
-                                    Intent intent = new Intent();
-                                    intent.putExtra("isLogin", true);
-                                    intent.setClass(SplashActivity.this, MainActivity.class);
-                                    startActivity(intent);
-                                    finish();
-                                }
-                            });
 
-                        }
-                    }, 1000);
-
-                    try {
-                        unregisterReceiver(broadcastRec);
-                    } catch (Exception e) {
-                        // TODO: handle exception
-                    }
-                    break;
                 case -1:
                     if (proDialog != null) {
                         proDialog.dismiss();
