@@ -43,7 +43,7 @@ public class NewsListActivity extends Activity {
         }) {
             @Override
             public void convert(ViewHolder helper, NewsListBean.ResultBean item, int position) {
-                helper.setText(R.id.txt_name, item.getTitle());
+                helper.setText(R.id.txt_name, item.getTitle(),position);
             }
         };
         gridView.setAdapter(adapter);

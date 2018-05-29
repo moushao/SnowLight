@@ -334,8 +334,8 @@ public class SplashActivity extends Activity {
         getSharedData();
         registerBroadcastReceiver();
 
-        //无用户信息显示登录界面，有用户信息直接登录
-        if (hasInfo) {
+        //无用户信息显示登录界面，有用户信息直接登录,是否改ip后需要重新登录
+        if (hasInfo && !Constants.isReLogin) {
             init_layout.setVisibility(View.VISIBLE);
             login();
         } else {
@@ -474,7 +474,24 @@ public class SplashActivity extends Activity {
         configView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SplashActivity.this, IPActivity.class));
+                Intent itt = new Intent(SplashActivity.this, IPActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.FROM, "SplashActivity");
+                itt.putExtras(bundle);
+                startActivity(itt);
+                finish();
+            }
+        });
+        view_login.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent itt = new Intent(SplashActivity.this, IPActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.FROM, "SplashActivity");
+                itt.putExtras(bundle);
+                startActivity(itt);
+                finish();
+                return true;
             }
         });
     }

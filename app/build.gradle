@@ -18,7 +18,7 @@ android {
         config {
             keyAlias 'alias'
             keyPassword 'pvirtech123'
-            storeFile file('E:/Workspace/Pvirtech/xueliang/SnowLight/keystore.jks')
+            storeFile file('D:/workspace/xueliang/SnowLight/keystore.jks')
             storePassword 'pvirtech123'
         }
     }
@@ -44,7 +44,7 @@ android {
     }
     android.applicationVariants.all { variant ->
         variant.outputs.all {
-            outputFileName = "xueliang_hefei_${releaseTime()}.apk"
+            outputFileName = "xueliang_yidongduan_${releaseTime()}.apk"
         }
     }
 }

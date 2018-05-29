@@ -14,13 +14,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.zip.InflaterInputStream;
+
 
 /**
  * Created by xxx on 2016/5/25.
  */
 public class ViewHolder {
     private final SparseArray<View> mViews;
-    private int mPosition;
+    public int mPosition;
     private View mConvertView;
     private ItemClick mItemClick;
 
@@ -80,10 +82,12 @@ public class ViewHolder {
      * @param text
      * @return
      */
-    public ViewHolder setText(int viewId, String text) {
+    public ViewHolder setText(int viewId, String text, int position) {
         TextView view = getView(viewId);
         view.setText(text);
         view.setKeyListener(null);
+        view.setTag(position);
+        mPosition = position;
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

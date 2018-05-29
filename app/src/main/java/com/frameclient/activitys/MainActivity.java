@@ -242,7 +242,7 @@ public class MainActivity extends Activity {
                 }) {
                     @Override
                     public void convert(ViewHolder helper, final ResourceItemInfo item, final int position) {
-                        helper.setText(R.id.tv_camera, item.name);
+                        helper.setText(R.id.tv_camera, item.name,position);
 
                     }
                 };
@@ -696,12 +696,19 @@ public class MainActivity extends Activity {
                 startActivity(new Intent(MainActivity.this, NewsListActivity.class));
             }
         });
+
         config.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(MainActivity.this, IPActivity.class));
+                Intent itt = new Intent(MainActivity.this, IPActivity.class);
+                Bundle bundle = new Bundle();
+                bundle.putString(Constants.FROM, "MainActivity");
+                itt.putExtras(bundle);
+                startActivity(itt);
+                finish();
             }
         });
+
 
     }
 

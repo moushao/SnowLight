@@ -394,7 +394,7 @@ public class NetWorkService extends IntentService {
 												sendBroadcast(intent);
 												*/
                                             //登录成功后开始获取资源
-                                            tcp.sendGetResourceMsg(rsp.uid, rsp.source_id, rsp.type);
+                                            tcp.sendGetResourceMsg(rsp.uid, rsp.source_id, 1);
 
                                             Constants.uuid = rsp.uid;
                                             Intent login_intent = new Intent("com.frameclient.login.rsp");

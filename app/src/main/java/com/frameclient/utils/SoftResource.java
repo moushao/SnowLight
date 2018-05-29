@@ -64,9 +64,9 @@ public class SoftResource
 	
 	public static int timeout = 20;
 	public static boolean isGetResource = false;
-	
-	private static List<ResourceItemInfo> r_list = new ArrayList<ResourceItemInfo>();
-	private static List<ResourceItemInfo> s_list = new ArrayList<ResourceItemInfo>();
+
+    public static List<ResourceItemInfo> r_list = new ArrayList<ResourceItemInfo>();
+    public static List<ResourceItemInfo> s_list = new ArrayList<ResourceItemInfo>();
 	
 	public static List<ResourceItemInfo> getAdapterList()
 	{

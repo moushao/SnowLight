@@ -1,14 +1,15 @@
 package com.frameclient.activitys;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.frameclient.utils.Constants;
 import com.frameclient.utils.SharedPreferencesHelper;
+import com.frameclient.utils.SoftResource;
 
 public class IPActivity extends Activity {
 
@@ -24,23 +25,41 @@ public class IPActivity extends Activity {
             @Override
             public void onClick(View v) {
                 if (TextUtils.isEmpty(ip_base_url.getText().toString()) || TextUtils.isEmpty(ip_address.getText()
-                        .toString())) {
-                    Toast.makeText(IPActivity.this, "视频地址和服务地址不能为空", Toast.LENGTH_SHORT).show();
+                        .toString()))
                     return;
-                }
                 StringBuilder builder = new StringBuilder();
                 builder.append("http://");
                 builder.append(ip_base_url.getText().toString());
-                //保存到全局
                 Constants.BASE_URL = builder.toString();
                 Constants.IP_ADDRESS = ip_address.getText().toString();
+                Constants.isReLogin = true;
                 //保存到缓存中
                 SharedPreferencesHelper.putString(IPActivity.this, "IP_ADDRESS", Constants
                         .IP_ADDRESS);
                 SharedPreferencesHelper.putString(IPActivity.this, "BASE_URL", Constants.BASE_URL);
+                SoftResource.r_list.clear();
+                SoftResource.s_list.clear();
+                Intent itt = new Intent(IPActivity.this, SplashActivity.class);
+                startActivity(itt);
                 finish();
+
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Constants.isReLogin = true;
+        String s = getIntent().getExtras().getString(Constants.FROM);
+        if (s.equals("MainActivity")) {
+            Intent itt = new Intent(IPActivity.this, MainActivity.class);
+            startActivity(itt);
+        } else {
+            Intent itt = new Intent(IPActivity.this, SplashActivity.class);
+            startActivity(itt);
+        }
+        finish();
+        super.onBackPressed();
     }
 }
